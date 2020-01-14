@@ -18,6 +18,7 @@ function sync_configuration()
     # Notify user that script has started
     notify-send "Syncing Emacs configuration" "Syncing..."
 
+    # cd into emacs config directory and pull changes from Github
     cd ~/Git/custom-emacs-config
     git pull | tee $tempfile
 
