@@ -29,8 +29,8 @@ function sync_configuration()
     else
     {
 	# Backup older config
-	Copy-Item "$emacs_home\.emacs" "$emacs_home\.emacs.bkp"
-	Copy-Item "$emacs_home\.config.org" ".\.config.org.bkp"
+	Copy-Item -Force "$emacs_home\.emacs" "$emacs_home\.emacs.bkp"
+	Copy-Item -Force "$emacs_home\.config.org" ".\.config.org.bkp"
 
 	# Copy new config
 	Copy-Item -Force ".\.emacs" "$emacs_home\.emacs"
