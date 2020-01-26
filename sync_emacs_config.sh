@@ -23,7 +23,7 @@ function sync_configuration()
     git pull | tee $tempfile
 
     # Count number of lines of output produced by git pull
-    line_count=`wc -l < $tempfile | awk '{print $1}'`
+    line_count=`wc -l < $tempfile`
 
     # If git pull produced only 1 line of ouput, it means
     # that the local repository is up to date with the remote
