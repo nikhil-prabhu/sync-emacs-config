@@ -4,7 +4,7 @@
 TEMPFILE="/tmp/sync-emacs-output-$$"
 
 # Remove temporary file when script exits
-trap remove-tempfile EXIT
+trap remove-tempfile EXIT SIGINT SIGTERM SIGKILL SIGHUP
 
 # Function to remove temporary file
 function remove-tempfile()
