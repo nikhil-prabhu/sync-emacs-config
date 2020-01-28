@@ -2,13 +2,13 @@
 New-Variable -Name tempfile -Value "C:\Users\$env:UserName\AppData\Local\Temp\tempfile-$pid"
 
 # Emacs default directory
-New-Variable -Name emacs-home -Value "C:\Users\$env:UserName\AppData\Roaming"
+New-Variable -Name emacs_home -Value "C:\Users\$env:UserName\AppData\Roaming"
 
 # current working directory
-New-Variable -Name current-directory -Value (Get-Item -Path '.\').FullName
+New-Variable -Name current_directory -Value (Get-Item -Path '.\').FullName
 
 # Main code: sync emacs configuration from Github
-function sync-configuration()
+function sync_configuration()
 {
     # cd into emacs config directory and pull changes from Github
     cd "C:\Users\$env:UserName\Git\custom-emacs-config"
@@ -29,12 +29,12 @@ function sync-configuration()
     else
     {
 	# Backup older config
-	Copy-Item -Force "$emacs-home\.emacs" "$emacs-home\.emacs.bkp"
-	Copy-Item -Force "$emacs-home\.config.org" ".\.config.org.bkp"
+	Copy-Item -Force "$emacs_home\.emacs" "$emacs_home\.emacs.bkp"
+	Copy-Item -Force "$emacs_home\.config.org" "$emacs_home\config.org.bkp"
 
 	# Copy new config
-	Copy-Item -Force ".\.emacs" "$emacs-home\.emacs"
-	Copy-Item -Force ".\.config.org" "$emacs-home\.config.org"
+	Copy-Item -Force ".\.emacs" "$emacs_home\.emacs"
+	Copy-Item -Force ".\.config.org" "$emacs_home\.config.org"
 
 	Write "Configuration synced successfully."
 	exit
@@ -44,12 +44,12 @@ function sync-configuration()
 # Start synchronization
 try
 {
-    sync-configuration
+    sync_configuration
 }
 
 # Remove tempfile and restore previous working directory
 finally
 {
     Remove-Item -Force "$tempfile"
-    cd "$current-directory"
+    cd "$current_directory"
 }
